@@ -1,0 +1,25 @@
+public enum CommandType
+{
+    PowerToggle,
+    ReadSunSensors,
+    ReadMagnetometer,
+    RotateToEarth,
+    RotateToSun,
+    JumpTo,
+    TakeEarthPhoto,
+    RotateAntennaToEarth,
+    SendMessageToEarth,
+    StabilizeSatellite,
+    CheckEarthInFrame,
+    Wait,
+    ConditionalJump,
+    CalibrateGyroscopes,
+    ChargeBattery,
+    OpenCameraCover,
+    CloseCameraCover,
+    CompressPhoto,
+    CheckCommunicationLink,
+    DestroyPlanet,
+    FaceEarth = RotateToEarth,
+    FaceSun = RotateToSun
+}

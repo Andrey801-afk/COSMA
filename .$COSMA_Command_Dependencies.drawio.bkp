@@ -1,0 +1,186 @@
+<mxfile host="app.diagrams.net" modified="2026-05-10T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="cosma-real-command-dependencies" name="COSMA Real Dependencies">
+    <mxGraphModel dx="1800" dy="1300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1350" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="COSMA: какие команды самостоятельны, а какие зависят от других" style="text;html=1;strokeColor=none;fillColor=none;fontSize=27;fontStyle=1;fontColor=#0b1f35;align=left;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="40" y="24" width="1020" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="Сплошная стрелка: предыдущая команда создает состояние, без которого следующая команда не выполнится. Пунктир: команда формально запускается, но без этого условия результат будет не тем." style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#52616f;align=left;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="42" y="66" width="1120" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend" value="Легенда&lt;br&gt;&lt;b&gt;Синий&lt;/b&gt; - команда&lt;br&gt;&lt;b&gt;Зеленый&lt;/b&gt; - состояние после команды&lt;br&gt;&lt;b&gt;Желтый&lt;/b&gt; - ресурс/числовое условие&lt;br&gt;&lt;b&gt;Фиолетовый&lt;/b&gt; - логика программы&lt;br&gt;&lt;b&gt;Красный&lt;/b&gt; - опасная команда&lt;br&gt;Пунктир - нужно для правильного результата, но не всегда блокирует запуск" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#b8c2cc;fontSize=13;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="24" width="420" height="142" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="battery" value="Батарея&lt;br&gt;старт: 55%&lt;br&gt;датчики 2% / утилиты 3%&lt;br&gt;стабилизация 5% / поворот 8%&lt;br&gt;связь 10% / фото 12%&lt;br&gt;уничтожение: строго 100%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="260" height="118" as="geometry"/>
+        </mxCell>
+        <mxCell id="global" value="Глобально перед RUN/STEP&lt;br&gt;есть ProgramModel&lt;br&gt;есть SatelliteStateController&lt;br&gt;в программе есть команды&lt;br&gt;есть текущая строка" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="340" y="118" width="290" height="96" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="standaloneLane" value="A. Самостоятельные команды" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#f8fbff;strokeColor=#6c8ebf;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="1700" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="power" value="Питание ВКЛ/ВЫКЛ&lt;br&gt;&lt;b&gt;Не зависит от других команд&lt;/b&gt;&lt;br&gt;Условие: если включаем, батарея &gt; 0&lt;br&gt;Дает: powerOn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="312" width="280" height="76" as="geometry"/>
+        </mxCell>
+        <mxCell id="wait" value="Ждать&lt;br&gt;&lt;b&gt;Самостоятельна&lt;/b&gt;&lt;br&gt;Условие: seconds &gt;= 0&lt;br&gt;На состояние спутника не влияет" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="410" y="312" width="250" height="76" as="geometry"/>
+        </mxCell>
+        <mxCell id="jump" value="Перейти к строке&lt;br&gt;&lt;b&gt;Самостоятельна&lt;/b&gt;&lt;br&gt;Условие: targetLine&lt;br&gt;Строка ограничивается диапазоном программы" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="710" y="312" width="250" height="76" as="geometry"/>
+        </mxCell>
+        <mxCell id="if" value="Если условие -&gt; строка&lt;br&gt;&lt;b&gt;Самостоятельна по запуску&lt;/b&gt;&lt;br&gt;Но читает выбранный флаг состояния&lt;br&gt;true - переход, false - дальше" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="306" width="270" height="88" as="geometry"/>
+        </mxCell>
+        <mxCell id="powerOn" value="powerOn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="321" width="150" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_power_powerOn" value="создает" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="power" target="powerOn"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="solarLane" value="B. Цепочка Солнца и зарядки" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#f8fbff;strokeColor=#9fb3c8;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="450" width="1700" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="readSun" value="Считать солнечные датчики&lt;br&gt;Зависит: PowerToggle - powerOn&lt;br&gt;Условия: батарея &gt;= 2%, controller&lt;br&gt;Дает: hasSunData + sunDetected" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="500" width="270" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="sunData" value="hasSunData&lt;br&gt;sunDetected" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="512" width="150" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="rotateSun" value="Повернуть к Солнцу&lt;br&gt;Зависит: ReadSunSensors&lt;br&gt;Условия: powerOn, sunDetected, CanRotateToSun, батарея &gt;= 8%&lt;br&gt;Дает: FacingSun" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="580" y="494" width="290" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="facingSun" value="FacingSun" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="910" y="512" width="140" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="charge" value="Зарядить батарею&lt;br&gt;Зависит: RotateToSun - FacingSun&lt;br&gt;Условия: powerOn&lt;br&gt;Дает: заряд до 100% за 15 сек" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="500" width="270" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="battery100" value="batteryCharge = 100%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="512" width="190" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_sun1" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="readSun" target="sunData"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_sun2" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="sunData" target="rotateSun"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_sun3" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="rotateSun" target="facingSun"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_sun4" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="facingSun" target="charge"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_sun5" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#d6b656;" edge="1" parent="1" source="charge" target="battery100"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="earthLane" value="C. Цепочка Земли: ориентация, фото, связь" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#f8fbff;strokeColor=#9fb3c8;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="640" width="1700" height="360" as="geometry"/>
+        </mxCell>
+        <mxCell id="readEarth" value="Считать магнитометр&lt;br&gt;Зависит: PowerToggle - powerOn&lt;br&gt;Условия: батарея &gt;= 2%, controller&lt;br&gt;Дает: hasEarthData + earthDetected" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="700" width="270" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="earthData" value="hasEarthData&lt;br&gt;earthDetected" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="712" width="150" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="rotateEarthCam" value="Повернуть к Земле камерой&lt;br&gt;Зависит: ReadMagnetometer&lt;br&gt;Условия: powerOn, earthDetected, CanRotateToEarth, батарея &gt;= 8%&lt;br&gt;Дает: FacingEarth + Camera side" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="580" y="678" width="300" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="cameraEarth" value="Камера смотрит на Землю" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="696" width="190" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="openCover" value="Открыть крышку камеры&lt;br&gt;Зависит: PowerToggle - powerOn&lt;br&gt;Условия: батарея &gt;= 3%&lt;br&gt;Дает: cameraCoverOpen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="580" y="808" width="300" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="coverOpen" value="cameraCoverOpen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="820" width="170" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="checkFrame" value="Проверить Землю в кадре&lt;br&gt;Зависит: powerOn + controller&lt;br&gt;Для true нужны: cameraCoverOpen + камера на Землю&lt;br&gt;Дает: earthInFrame true/false" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="744" width="300" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="takePhoto" value="Сделать фото&lt;br&gt;Жестко зависит: powerOn, controller, батарея &gt;= 12%&lt;br&gt;Для фото Земли нужны: крышка открыта + камера на Землю&lt;br&gt;Иначе: черный экран или звезды&lt;br&gt;Дает: photoTaken" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="858" width="300" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="photoTaken" value="photoTaken&lt;br&gt;dataCompressed = false&lt;br&gt;dataSent = false" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="884" width="170" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="compress" value="Сжать снимок&lt;br&gt;Зависит: TakeEarthPhoto - photoTaken&lt;br&gt;Условия: powerOn, батарея &gt;= 3%&lt;br&gt;Дает: dataCompressed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="880" width="270" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="compressed" value="dataCompressed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="892" width="150" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_earth1" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="readEarth" target="earthData"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_earth2" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="earthData" target="rotateEarthCam"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_earth3" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="rotateEarthCam" target="cameraEarth"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_cover" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="openCover" target="coverOpen"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_cam_check" value="для true" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;dashed=1;" edge="1" parent="1" source="cameraEarth" target="checkFrame"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_cover_check" value="для true" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;dashed=1;" edge="1" parent="1" source="coverOpen" target="checkFrame"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_cam_photo" value="для фото Земли" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;dashed=1;" edge="1" parent="1" source="cameraEarth" target="takePhoto"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_cover_photo" value="для нечерного кадра" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;dashed=1;" edge="1" parent="1" source="coverOpen" target="takePhoto"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_photo" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="takePhoto" target="photoTaken"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_photo_compress" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="photoTaken" target="compress"><mxGeometry relative="1" as="geometry"><mxPoint x="470" y="916" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="e_compress" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="compress" target="compressed"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="linkLane" value="D. Цепочка связи" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#f8fbff;strokeColor=#9fb3c8;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1040" width="1140" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="rotateEarthAnt" value="Повернуть к Земле антенной&lt;br&gt;или Повернуть антенну к Земле&lt;br&gt;Зависит: ReadMagnetometer&lt;br&gt;Условия: powerOn, earthDetected, батарея &gt;= 8%&lt;br&gt;Дает: antennaFacingEarth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1105" width="310" height="102" as="geometry"/>
+        </mxCell>
+        <mxCell id="antennaEarth" value="antennaFacingEarth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="1128" width="170" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="checkLink" value="Проверить канал связи&lt;br&gt;Зависит: antennaFacingEarth&lt;br&gt;Условия: powerOn, батарея &gt;= 2%, CanSendMessage&lt;br&gt;Дает: communicationLinkAvailable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="640" y="1110" width="300" height="92" as="geometry"/>
+        </mxCell>
+        <mxCell id="linkAvailable" value="communicationLinkAvailable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="1128" width="170" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="send" value="Отправить сообщение&lt;br&gt;Зависит: CheckCommunicationLink&lt;br&gt;Условия: powerOn, communicationLinkAvailable, controller, CanSendMessage, батарея &gt;= 10%&lt;br&gt;Если photoTaken: нужен dataCompressed&lt;br&gt;Дает: dataSent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="1090" width="330" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="dataSent" value="dataSent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1590" y="1126" width="120" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_link0" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="earthData" target="rotateEarthAnt"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_link1" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="rotateEarthAnt" target="antennaEarth"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_link2" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="antennaEarth" target="checkLink"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_link3" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="checkLink" target="linkAvailable"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_link4" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="linkAvailable" target="send"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_link5" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="send" target="dataSent"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_compressed_send" value="если отправляем фото" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;dashed=1;" edge="1" parent="1" source="compressed" target="send"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="stabLane" value="E. Цепочка стабилизации" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#f8fbff;strokeColor=#9fb3c8;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="640" width="520" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="calibrate" value="Калибровать гироскопы&lt;br&gt;Зависит: PowerToggle - powerOn&lt;br&gt;Условия: батарея &gt;= 3%&lt;br&gt;Дает: gyrosCalibrated" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="700" width="220" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="gyros" value="gyrosCalibrated" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1510" y="712" width="160" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="stabilize" value="Стабилизировать спутник&lt;br&gt;Зависит: CalibrateGyroscopes&lt;br&gt;Условия: powerOn, gyrosCalibrated, CanRotateToEarth, батарея &gt;= 5%&lt;br&gt;Дает: isStabilized" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="800" width="250" height="92" as="geometry"/>
+        </mxCell>
+        <mxCell id="stabilized" value="isStabilized" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1530" y="817" width="140" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_stab1" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="calibrate" target="gyros"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_stab2" value="нужно" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="gyros" target="stabilize"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_stab3" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#82b366;" edge="1" parent="1" source="stabilize" target="stabilized"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="destroyLane" value="F. Спец-команда" style="swimlane;html=1;rounded=1;whiteSpace=wrap;fillColor=#fff5f5;strokeColor=#b85450;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="930" width="520" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="destroy" value="Уничтожить планету&lt;br&gt;Зависит: ChargeBattery, если батарея еще не 100%&lt;br&gt;Условия: powerOn, batteryCharge = 100%, planetDestroyed = false, controller, CanDestroyPlanet&lt;br&gt;Дает: planetDestroyed, batteryCharge = 0%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="990" width="290" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="planetDestroyed" value="planetDestroyed&lt;br&gt;battery = 0%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="1011" width="130" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_destroy_bat" value="нужно 100%" style="endArrow=block;html=1;rounded=0;strokeColor=#d6b656;" edge="1" parent="1" source="battery100" target="destroy"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_destroy" value="" style="endArrow=block;html=1;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="destroy" target="planetDestroyed"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="ifList" value="Флаги, которые может читать ConditionalJump: PowerOn, SunDataReady, EarthDataReady, FacingEarth, FacingSun, PhotoTaken, EarthInFrame, DataSent, LastCommandSuccess, LastCommandFailed, Stabilized, BatteryLow, GyrosCalibrated, CameraCoverOpen, DataCompressed, CommunicationLinkAvailable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1280" width="1700" height="50" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

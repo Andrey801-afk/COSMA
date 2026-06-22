@@ -1,0 +1,19 @@
+public enum CommandConditionType
+{
+    PowerOn,
+    SunDataReady,
+    EarthDataReady,
+    FacingEarth,
+    FacingSun,
+    PhotoTaken,
+    EarthInFrame,
+    DataSent,
+    LastCommandSuccess,
+    LastCommandFailed,
+    Stabilized,
+    BatteryLow,
+    GyrosCalibrated,
+    CameraCoverOpen,
+    DataCompressed,
+    CommunicationLinkAvailable
+}
